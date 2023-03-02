@@ -1,0 +1,7 @@
+// write to local repo file, modify to enable more repos, enable/disable some repos, create meta cache, search and install
+dnf repolist // list all avaible repos
+dnf clean metadata // clean dnf local cache {metadata,packages,dbcache,expire-cache,all}
+dnf config-manager --add-repo $(path of local repo file )// add local repo file
+dnf mc // dnf update local cache (meta cache)
+dnf config-manager --enable/--disable [repo name]
+dnf whatprovides [pakcage name]

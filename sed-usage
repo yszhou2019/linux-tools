@@ -1,0 +1,6 @@
+sed pattern -i file // inplace
+sed -z 's/old/new/nth' -i file // replace nth occurrence of a word
+sed -e 'ns/old/new/' -i file // replace nth line of a word
+sed 's/old/new/g' -i file // replace all occurences of a word
+
+https://unix.stackexchange.com/questions/587916/using-sed-to-replace-nth-occurrence-of-a-word

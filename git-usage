@@ -1,0 +1,8 @@
+// git usage
+[target branch] git rebase [based-from branch]
+git cherry-pick
+git pull // pull the remote branch to a local unexisting branch
+git switch [remote branch name] // fetch a remote branch to a local new branch https://stackoverflow.com/questions/9537392/git-fetch-a-remote-branch
+
+// file permission in host git, mounted to container
+https://stackoverflow.com/questions/6448242/git-push-error-insufficient-permission-for-adding-an-object-to-repository-datab
