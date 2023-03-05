@@ -1,0 +1,5 @@
+// usage of g++
+
+g++ -E [srcfile].cpp -o src.ii // preprocess
+g++ -S [srcfile].cpp -o src.asm // only compile to assembly language, without linkage
+g++ -c [srcfile].cpp -o src.o // only compile to object code, without linkage
