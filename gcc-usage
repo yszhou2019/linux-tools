@@ -1,6 +1,0 @@
-// usage of g++
-
-g++ -E [srcfile].cpp -o src.ii // preprocess
-g++ -S [srcfile].cpp -o src.asm // only compile to assembly language, without linkage
-g++ -c [srcfile].cpp -o src.o // only compile to object code, without linkage
-g++ -o [target] first.o second.o libthird.o // linkage, link several object files to target executable
