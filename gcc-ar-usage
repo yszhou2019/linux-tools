@@ -9,7 +9,7 @@ g++ -o [target] first.o second.o libthird.o // linkage, link several object file
 // https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
 // -static option
 If both static and shared libraries are found, the linker gives preference to linking with the shared library unless the -static option is used.
-It makes a difference where in the command you write this option; the linker searches and processes libraries and object files in the order they are specified. Thus, ‘foo.o -lz bar.o’ searches library ‘z’ after file foo.o but before bar.o. If bar.o refers to functions in ‘z’, those functions may not be loaded.
+**It makes a difference where in the command you write this option; the linker searches and processes libraries and object files in the order they are specified**. Thus, ‘foo.o -lz bar.o’ searches library ‘z’ after file foo.o but before bar.o. If bar.o refers to functions in ‘z’, those functions may not be loaded.
 // -shared option
 // -static
 On systems that support dynamic linking, this overrides -pie and prevents linking with the shared libraries. On other systems, this option has no effect.
