@@ -1,3 +1,48 @@
+What will happen when we build a static library via CMake?
+
+What will happen when we build a static library in command-lind directly?
+What will happen when we build a static library with static libraries?
+What will happen when we build a static library with shared libraries?
+What will happen when we build a static library with static libraries?
+
+terminology:
+raw build: compile source files with gcc, archive them with ar or g++
+cmake build: describe the build procedure in CMakeLists
+
+raw build static library:
+- against static libraries, no need to link against any other libraries, just compile source code to object code, archive them.
+- against shared libraries, no need to link against any other libraries, just compile source code to object code, archive them.
+
+cmake build static library:
+- in short, keep dependencies, but won't merge any other binary code of other libraries into the target archive.
+- In CMakeLists.txt, cmake can help keep the link directories(`-L`) and link libraries(`-l`) and inherit and forward the dependencies via command `target_link_directories` or `target_link_libraries`
+- In CMakeLists.txt, cmake can help keep the link directories(`-L`) and link libraries(`-l`) and inherit and forward the dependencies via command `target_link_directories` or `target_link_libraries`
+
+raw build shared library:
+`g++ -shared -o libtools.so foo.o -lbar`, `ldd` result will show that libbar not found
+- against static library,
+- against shared library,
+
+
+
+cmake build shared library:
+- against static library,
+- against shared library,
+
+cmake build dynamic library:
+against static/shared, keep dependencies
+g++ -shared -o libtools.so foo.o -lbar // link success, but ldd result shows dependency libbar.so not found
+
+raw build dynamic library
+
+what does it do when we build a static library against another static library?
+1 we cannot raw build a static library against another static library
+2 we can inherit the dependencies via "target_link_libraries" in CMake
+target_link_libraries(liba b c), forward the link directories and link libraries
+
+only dynamic library need to link other dynamic 
+can we build static with PIC?Yes
+
 // usage of g++
 
 g++ -E [srcfile].cpp -o src.ii // preprocess
@@ -15,6 +60,17 @@ If both static and shared libraries are found, the linker gives preference to li
 On systems that support dynamic linking, this overrides -pie and prevents linking with the shared libraries. On other systems, this option has no effect.
 // -shared
 Produce a shared object which can then be linked with other objects to form an executable. Not all systems support this option. For predictable results, you must also specify the same set of options used for compilation (-fpic, -fPIC, or model suboptions) when you specify this linker option.1
+
+// -Wl,option
+// what does this command do? pass `-Wl,-rpath,/custom/rpath/` to linker, write rpath(`run-time search path`) to the `.dynamic` section of the header of elf(executable-and-linkable-format)
+> In computing, rpath designates the run-time **search path hard-coded in an executable file** or library. Dynamic linking loaders use the rpath to find required libraries.
+> Specifically, it encodes a path to shared libraries into the header of an executable (or another shared library). This RPATH header value (so named in the Executable and Linkable Format header standards) may either override or supplement the system default dynamic linking search paths.
+> Notes: **Static libraries are searched and linked into the ELF file at link time and are not searched at run time.**
+> https://en.wikipedia.org/wiki/Rpath
+// https://stackoverflow.com/questions/6562403/i-dont-understand-wl-rpath-wl
+    **Pass option as an option to the linker**.  If option contains commas, it is split into multiple options at the commas.  You can use this syntax to pass an argument to
+    the option.  For example, -Wl,-Map,output.map passes -Map output.map to the linker.  When using the GNU linker, you can also get the same effect with
+    -Wl,-Map=output.map.
 
 // code generation option
 // https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#Code-Gen-Options
